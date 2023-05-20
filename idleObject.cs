@@ -34,13 +34,12 @@ public class idleObject : MonoBehaviour
             currCost = string.Format("{0:0}",startCost*Mathf.Pow(costModifier,total));
             if (float.Parse(currCost)>1000000)
             {
-                if(float.Parse(currCost)/(float)1000000>1000)
+                if(float.Parse(currCost)/1000000f>1000)
                 {
-                    currCost=(float.Parse(currCost)/(float)1000000000).ToString();
-                    Debug.Log(currCost);
+                    currCost=(float.Parse(currCost)/1000000000f).ToString();
                     if(float.Parse(currCost)>1000)
                     {
-                        currCost = string.Format("{0:0.###}",float.Parse(currCost)/(float)1000)+"T";
+                        currCost = string.Format("{0:0.###}",float.Parse(currCost)/1000f)+"T";
                     }
                     else
                     {
@@ -51,7 +50,7 @@ public class idleObject : MonoBehaviour
                 }
                 else
                 {
-                    currCost = string.Format("{0:0.###}",float.Parse(currCost)/(float)1000000)+"M";
+                    currCost = string.Format("{0:0.###}",float.Parse(currCost)/1000000f)+"M";
                 }
                 
 
