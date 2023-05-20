@@ -12,11 +12,11 @@ public class idleObject : MonoBehaviour
     public float costModifier;
     public double baseXP;
     public int rateOfXP;
+    public string currCost;
     GameObject amountText;
     GameObject costText;
     GameObject tot_xp;
     GameObject xps;
-    string currCost;
     string initial;
     void Start()
     {
@@ -24,6 +24,8 @@ public class idleObject : MonoBehaviour
         costText = this.gameObject.transform.GetChild(1).GetChild(0).gameObject;
         tot_xp=GameObject.FindWithTag("XP"); 
         xps=GameObject.FindWithTag("XPS");
+        costText.GetComponent<Text>().text = startCost.ToString();
+        currCost = startCost.ToString();
     }
 
     // Update is called once per frame
@@ -32,35 +34,33 @@ public class idleObject : MonoBehaviour
         if(total>0)
         {
             currCost = string.Format("{0:0}",startCost*Mathf.Pow(costModifier,total));
-            if (float.Parse(currCost)>1000000)
+            if (double.Parse(currCost)>1000000)
             {
-                if(float.Parse(currCost)/1000000f>1000)
+                if(double.Parse(currCost)/1000000d>1000)
                 {
-                    currCost=(float.Parse(currCost)/1000000000f).ToString();
-                    if(float.Parse(currCost)>1000)
+                    if(double.Parse(currCost)/1000000000d>1000)
                     {
-                        currCost = string.Format("{0:0.###}",float.Parse(currCost)/1000f)+"T";
+                        costText.GetComponent<Text>().text = string.Format("{0:0.###}",double.Parse(currCost)/(1000000000d*1000d))+"T";
                     }
                     else
                     {
-                        currCost = string.Format("{0:0.###}",float.Parse(currCost))+"B";
+                        costText.GetComponent<Text>().text = string.Format("{0:0.###}",double.Parse(currCost)/1000000000d)+"B";
                     }
                     
 
                 }
                 else
                 {
-                    currCost = string.Format("{0:0.###}",float.Parse(currCost)/1000000f)+"M";
+                    costText.GetComponent<Text>().text = string.Format("{0:0.###}",double.Parse(currCost)/1000000f)+"M";
                 }
                 
 
             }
+            else
+            {
+                costText.GetComponent<Text>().text = currCost.ToString();
+            }
         }
-        else
-        {
-            currCost = startCost.ToString();
-        }
-        costText.GetComponent<Text>().text = currCost;
         amountText.GetComponent<Text>().text = total.ToString();
         if (total >= rateOfXP)
         {
@@ -76,9 +76,9 @@ public class idleObject : MonoBehaviour
     }
     public void purchase()
     {
-        if(tot_xp.GetComponent<displayXP>().xp >= int.Parse(costText.GetComponent<Text>().text))
+        if(tot_xp.GetComponent<displayXP>().xp >= double.Parse(currCost))
         {
-            tot_xp.GetComponent<displayXP>().xp -= int.Parse(costText.GetComponent<Text>().text);
+            tot_xp.GetComponent<displayXP>().xp -= double.Parse(currCost);
             total+=1;
             xps.GetComponent<xpsCount>().xps += baseXP * (30d/rateOfXP);
         }
