@@ -46,8 +46,6 @@ public class idleObject : MonoBehaviour
                     {
                         costText.GetComponent<Text>().text = string.Format("{0:0.###}",double.Parse(currCost)/1000000000d)+"B";
                     }
-                    
-
                 }
                 else
                 {
