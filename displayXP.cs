@@ -19,13 +19,13 @@ public class displayXP : MonoBehaviour
     {
         if(xp>1000000)
         {
-            shortxp = xp/(double)1000000;
+            shortxp = xp/1000000d;
             if(shortxp>1000)
             {
-                shortxp = shortxp/(double)1000;
+                shortxp = shortxp/1000d;
                 if(shortxp > 1000)
                 {
-                    this.GetComponent<TextMeshProUGUI>().text = string.Format("{0:0.###}",shortxp/(double)1000) + "T";
+                    this.GetComponent<TextMeshProUGUI>().text = string.Format("{0:0.###}",shortxp/1000d) + "T";
                 }
                 else
                 {
@@ -34,7 +34,7 @@ public class displayXP : MonoBehaviour
             }
             else
             {
-                this.GetComponent<TextMeshProUGUI>().text = string.Format("{0:0.###}",xp/(double)1000000) + "M";
+                this.GetComponent<TextMeshProUGUI>().text = string.Format("{0:0.###}",xp/1000000d) + "M";
             }
         }
         else
