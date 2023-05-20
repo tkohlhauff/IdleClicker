@@ -17,13 +17,13 @@ public class xpsCount : MonoBehaviour
     {
         if(xps>1000000)
         {
-            shortxp = xps/(double)1000000;
+            shortxp = xps/1000000d;
             if(shortxp>1000)
             {
-                shortxp = shortxp/(double)1000;
+                shortxp = shortxp/1000d;
                 if(shortxp > 1000)
                 {
-                    this.GetComponent<TextMeshProUGUI>().text = string.Format("{0:0.###}",shortxp/(double)1000) + "T";
+                    this.GetComponent<TextMeshProUGUI>().text = string.Format("{0:0.###}",shortxp/1000d) + "T";
                 }
                 else
                 {
@@ -32,7 +32,7 @@ public class xpsCount : MonoBehaviour
             }
             else
             {
-                this.GetComponent<TextMeshProUGUI>().text = string.Format("{0:0.###}",xps/(double)1000000) + "M";
+                this.GetComponent<TextMeshProUGUI>().text = string.Format("{0:0.###}",xps/1000000d) + "M";
             }
         }
         else
