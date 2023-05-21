@@ -13,6 +13,7 @@ public class idleObject : MonoBehaviour
     public double baseXP;
     public int rateOfXP;
     public string currCost;
+    public AudioSource sound;
     GameObject amountText;
     GameObject costText;
     GameObject tot_xp;
@@ -78,6 +79,7 @@ public class idleObject : MonoBehaviour
         {
             tot_xp.GetComponent<displayXP>().xp -= double.Parse(currCost);
             total+=1;
+            sound.Play();
         }
     }
 }
