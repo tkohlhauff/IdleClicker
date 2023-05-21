@@ -46,13 +46,13 @@ public class idleObject : MonoBehaviour
                     {
                         costText.GetComponent<Text>().text = string.Format("{0:0.###}",double.Parse(currCost)/1000000000d)+"B";
                     }
+                    
+
                 }
                 else
                 {
                     costText.GetComponent<Text>().text = string.Format("{0:0.###}",double.Parse(currCost)/1000000f)+"M";
                 }
-                
-
             }
             else
             {
@@ -78,7 +78,6 @@ public class idleObject : MonoBehaviour
         {
             tot_xp.GetComponent<displayXP>().xp -= double.Parse(currCost);
             total+=1;
-            xps.GetComponent<xpsCount>().xps += baseXP * (30d/rateOfXP);
         }
     }
 }
