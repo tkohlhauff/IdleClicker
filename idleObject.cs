@@ -14,10 +14,15 @@ public class idleObject : MonoBehaviour
     public int rateOfXP;
     public string currCost;
     public AudioSource sound;
+    public string flavorText;
     GameObject amountText;
     GameObject costText;
     GameObject tot_xp;
     GameObject xps;
+    GameObject hover_ui;
+    private Vector3 mousePos;
+    private Vector3 objectPos;
+    public GameObject hoverObject;
     string initial;
     void Start()
     {
@@ -72,6 +77,31 @@ public class idleObject : MonoBehaviour
                 tot_xp.GetComponent<displayXP>().xp+=baseXP;
             }
         }
+    }
+    void OnMouseEnter()
+    {
+        objectPos = this.transform.position;
+        objectPos.y = 16;
+        hover_ui=Instantiate(hoverObject, objectPos, Quaternion.identity);
+        hover_ui.transform.SetParent(GameObject.FindGameObjectWithTag("Canvas").transform, false);
+        objectPos.z=1;
+        hover_ui.transform.SetPositionAndRotation(objectPos,Quaternion.identity);
+        hover_ui.transform.GetChild(0).GetChild(0).gameObject.GetComponent<Text>().text = costText.GetComponent<Text>().text;
+        hover_ui.transform.GetChild(1).GetChild(0).gameObject.GetComponent<Text>().text = (baseXP * (30d/rateOfXP)).ToString();
+        hover_ui.transform.GetChild(2).GetChild(0).gameObject.GetComponent<Text>().text = total.ToString();
+        hover_ui.transform.GetChild(3).GetChild(0).gameObject.GetComponent<Text>().text = (baseXP * (30d/rateOfXP)*total).ToString();
+        hover_ui.transform.GetChild(4).gameObject.GetComponent<Text>().text = flavorText;
+    }
+    void OnMouseOver()
+    {
+        hover_ui.transform.GetChild(0).GetChild(0).gameObject.GetComponent<Text>().text = costText.GetComponent<Text>().text;
+        hover_ui.transform.GetChild(1).GetChild(0).gameObject.GetComponent<Text>().text = (baseXP * (30d/rateOfXP)).ToString();
+        hover_ui.transform.GetChild(2).GetChild(0).gameObject.GetComponent<Text>().text = total.ToString();
+        hover_ui.transform.GetChild(3).GetChild(0).gameObject.GetComponent<Text>().text = (baseXP * (30d/rateOfXP)*total).ToString();
+    }
+    void OnMouseExit()
+    {
+        Destroy(hover_ui);
     }
     public void purchase()
     {
